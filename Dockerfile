@@ -231,4 +231,10 @@ RUN set -ex; \
   bash --version; \
 [ "$(bash -c 'echo "${BASH_VERSION%%[^0-9.]*}"')" = "$_BASH_VERSION.$_BASH_LATEST_PATCH" ];
 
+RUN ln -s /usr/local/bin/bash /bin/bash
+
+RUN apk add --no-cache --virtual curl && \
+    curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose
+
 CMD ["bash"]
